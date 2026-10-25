@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ثبت‌نام — NOVA</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+  <aside class="auth-side">
+    <a class="logo" href="index.html" style="position:relative;z-index:2"><span class="mark">◆</span> NOVA</a>
+    <div>
+      <div class="quote">«آینده متعلق به کسانی است<br>که همین حالا می‌سازندش.»</div>
+      <div class="sub">حساب رایگان بساز و در ۳۰ ثانیه اولین پروژه‌ات را راه بینداز — بدون کارت بانکی.</div>
+      <div class="mini-stats">
+        <div class="stat"><b>رایگان</b><span style="color:#b9b1dd;font-size:.85rem">شروع کن</span></div>
+        <div class="stat"><b>۱۴ روز</b><span style="color:#b9b1dd;font-size:.85rem">پلن حرفه‌ای</span></div>
+      </div>
+    </div>
+    <div style="position:relative;z-index:2;color:#8f87b8;font-size:.85rem">© ۲۰۲۶ NOVA</div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <h1>ساخت حساب جدید</h1>
+      <p class="lead">به نوا بپیوند — فقط چند ثانیه طول می‌کشد.</p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="name">نام و نام خانوادگی</label>
+          <span class="f-icon">👤</span>
+          <input id="name" type="text" placeholder="مثلاً علی رضایی" autocomplete="name">
+          <div class="err-msg">نام حداقل ۳ کاراکتر باشد</div>
+        </div>
+        <div class="field">
+          <label for="email">ایمیل</label>
+          <span class="f-icon">✉</span>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+          <div class="err-msg">ایمیل معتبر وارد کن</div>
+        </div>
+        <div class="field">
+          <label for="password">رمز عبور</label>
+          <span class="f-icon">🔑</span>
+          <input id="password" type="password" placeholder="حداقل ۸ کاراکتر" autocomplete="new-password">
+          <button type="button" class="toggle-pass" aria-label="نمایش رمز">👁</button>
+          <div class="strength"><i></i></div>
+          <div class="err-msg">رمز عبور حداقل ۸ کاراکتر باشد</div>
+        </div>
+        <div class="field">
+          <label for="repassword">تکرار رمز عبور</label>
+          <span class="f-icon">🔒</span>
+          <input id="repassword" type="password" placeholder="رمز را دوباره وارد کن" autocomplete="new-password">
+          <button type="button" class="toggle-pass" aria-label="نمایش رمز">👁</button>
+          <div class="err-msg">رمزها یکسان نیستند</div>
+        </div>
+        <div class="auth-row">
+          <label><input type="checkbox" id="terms"> <span>با <a href="#" onclick="return false">قوانین</a> موافقم</span></label>
+        </div>
+        <button class="btn btn-grad btn-block" type="submit">
+          <span class="spinner"></span><span class="btn-label">ایجاد حساب ✦</span>
+        </button>
+      </form>
+
+      <div class="auth-alt"><span>یا ثبت‌نام با</span></div>
+      <div class="socials">
+        <button onclick="toast('ثبت‌نام با Google (دمو)','info')">G</button>
+        <button onclick="toast('ثبت‌نام با GitHub (دمو)','info')">⌥</button>
+        <button onclick="toast('ثبت‌نام با Apple (دمو)','info')">"</button>
+      </div>
+
+      <p class="auth-foot">قبلاً ثبت‌نام کرده‌ای؟ <a href="login.html">وارد شو</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

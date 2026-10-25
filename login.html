@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود — NOVA</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+  <aside class="auth-side">
+    <a class="logo" href="index.html" style="position:relative;z-index:2"><span class="mark">◆</span> NOVA</a>
+    <div>
+      <div class="quote">«ابزارهایی که دوست داری،<br>در فضایی که به آن تعلق داری.»</div>
+      <div class="sub">بیش از ۱۲ هزار سازنده، طراح و تیم به نوا پیوسته‌اند. نوبت توست.</div>
+      <div class="mini-stats">
+        <div class="stat"><b>۹۹.۹٪</b><span style="color:#b9b1dd;font-size:.85rem">آپ‌تایم</span></div>
+        <div class="stat"><b>+۴.۸</b><span style="color:#b9b1dd;font-size:.85rem">امتیاز کاربران</span></div>
+      </div>
+    </div>
+    <div style="position:relative;z-index:2;color:#8f87b8;font-size:.85rem">© ۲۰۲۶ NOVA</div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <h1>ورود به حساب</h1>
+      <p class="lead">خوش برگشتی! ایمیل و رمز عبورت را وارد کن.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="email">ایمیل</label>
+          <span class="f-icon">✉</span>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+          <div class="err-msg">ایمیل معتبر وارد کن</div>
+        </div>
+        <div class="field">
+          <label for="password">رمز عبور</label>
+          <span class="f-icon">🔑</span>
+          <input id="password" type="password" placeholder="حداقل ۸ کاراکتر" autocomplete="current-password">
+          <button type="button" class="toggle-pass" aria-label="نمایش رمز">👁</button>
+          <div class="err-msg">رمز عبور حداقل ۸ کاراکتر باشد</div>
+        </div>
+        <div class="auth-row">
+          <label><input type="checkbox" checked> مرا به خاطر بسپار</label>
+          <a href="#" onclick="toast('لینک بازیابی (دمو) برایت ارسال شد','info');return false">رمز را فراموش کردی؟</a>
+        </div>
+        <button class="btn btn-grad btn-block" type="submit">
+          <span class="spinner"></span><span class="btn-label">ورود ←</span>
+        </button>
+      </form>
+
+      <div class="auth-alt"><span>یا ادامه با</span></div>
+      <div class="socials">
+        <button onclick="toast('ورود با Google (دمو)','info')">G</button>
+        <button onclick="toast('ورود با GitHub (دمو)','info')">⌥</button>
+        <button onclick="toast('ورود با Apple (دمو)','info')">"</button>
+      </div>
+
+      <p class="auth-foot">حساب نداری؟ <a href="register.html">ثبت‌نام کن</a></p>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

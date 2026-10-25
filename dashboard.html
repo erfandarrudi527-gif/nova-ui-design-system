@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>داشبورد — NOVA</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="aurora"><span></span><span></span><span></span></div>
+
+<div class="dash">
+  <aside class="side" id="sidebar">
+    <a class="logo" href="index.html"><span class="mark">◆</span> NOVA</a>
+    <nav>
+      <a href="#" class="active">▦ داشبورد</a>
+      <a href="#" onclick="toast('بخش پروژه‌ها (دمو)','info');return false">🗂 پروژه‌ها</a>
+      <a href="#" onclick="toast('بخش تحلیل‌ها (دمو)','info');return false">📈 تحلیل‌ها</a>
+      <a href="#" onclick="toast('بخش پیام‌ها (دمو)','info');return false">✉ پیام‌ها</a>
+      <a href="#" onclick="toast('بخش تنظیمات (دمو)','info');return false">⚙ تنظیمات</a>
+    </nav>
+    <div class="spacer"></div>
+    <a href="#" id="logout" style="display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;color:#fb7185">⏻ خروج از حساب</a>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:14px">
+        <button class="burger" id="sideToggle" aria-label="منو">☰</button>
+        <div>
+          <h2 style="font-size:1.3rem">سلام، <span class="grad-text" id="userName">کاربر</span> 👋</h2>
+          <p style="color:var(--muted);font-size:.88rem">امروز اوضاع عالی پیش می‌رود.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        <div class="search">🔍 <input placeholder="جستجو در پروژه‌ها…"></div>
+        <div class="user-chip"><span class="avatar" id="userAvatar">N</span><span id="userEmail" style="font-size:.85rem;color:var(--muted)"></span></div>
+        <button class="btn btn-ghost" data-logout style="padding:10px 18px">خروج ⏻</button>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi card reveal"><div class="k-top"><div class="k-icon" style="background:rgba(99,102,241,.16);color:#818cf8">👥</div><span class="k-delta up">+۱۲٪</span></div><div class="k-val" data-to="8420">۰</div><div class="k-label">کل بازدیدها</div></div>
+      <div class="kpi card reveal"><div class="k-top"><div class="k-icon" style="background:rgba(34,211,238,.14);color:#22d3ee">🚀</div><span class="k-delta up">+۸٪</span></div><div class="k-val" data-to="142">۰</div><div class="k-label">پروژه‌های فعال</div></div>
+      <div class="kpi card reveal"><div class="k-top"><div class="k-icon" style="background:rgba(236,72,153,.14);color:#f472b6">💰</div><span class="k-delta up">+۲۳٪</span></div><div class="k-val" data-to="36500">۰</div><div class="k-label">درآمد (تومان)</div></div>
+      <div class="kpi card reveal"><div class="k-top"><div class="k-icon" style="background:rgba(168,85,247,.14);color:#c084fc">📉</div><span class="k-delta down">-۲٪</span></div><div class="k-val" data-to="97">۰</div><div class="k-label">نرخ در دسترسی (٪)</div></div>
+    </div>
+
+    <div class="panels">
+      <div class="panel card reveal">
+        <h3>عملکرد ۷ روز اخیر</h3>
+        <div class="chart" id="chart"></div>
+      </div>
+      <div class="panel card reveal">
+        <h3>منابع ترافیک</h3>
+        <div class="donut-wrap">
+          <div class="donut"><b>۴۵٪</b></div>
+          <div class="legend">
+            <div><i style="background:var(--primary)"></i> جستجوی ارگانیک — ۴۵٪</div>
+            <div><i style="background:var(--secondary)"></i> شبکه‌های اجتماعی — ۲۷٪</div>
+            <div><i style="background:var(--accent)"></i> ارجاع — ۱۶٪</div>
+            <div><i style="background:rgba(255,255,255,.15)"></i> مستقیم — ۱۲٪</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-card card reveal">
+      <h3 style="margin-bottom:18px">آخرین تراکنش‌ها</h3>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>مشتری</th><th>پروژه</th><th>مبلغ</th><th>وضعیت</th><th>تاریخ</th></tr></thead>
+        <tbody id="txBody"></tbody>
+      </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+// ---- auth guard ----
+const session = DB.session();
+if (!session) { location.href = 'login.html'; }
+else {
+  document.getElementById('userName').textContent = session.name.split(' ')[0];
+  document.getElementById('userEmail').textContent = session.email;
+  document.getElementById('userAvatar').textContent = session.name.trim().charAt(0);
+}
+document.getElementById('logout').addEventListener('click', (e) => {
+  e.preventDefault();
+  DB.clearSession();
+  toast('با موفقیت خارج شدی 👋', 'info');
+  setTimeout(() => (location.href = 'index.html'), 800);
+});
+
+// ---- mobile sidebar ----
+document.getElementById('sideToggle').addEventListener('click', () =>
+  document.getElementById('sidebar').classList.toggle('open'));
+
+// ---- bar chart ----
+const days = ['شنبه','یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
+const vals = [62, 78, 45, 90, 68, 100, 84];
+const chart = document.getElementById('chart');
+days.forEach((d, i) => {
+  const b = document.createElement('div');
+  b.className = 'bar';
+  b.innerHTML = `<i title="${vals[i]}"></i><span>${d}</span>`;
+  chart.appendChild(b);
+  setTimeout(() => (b.querySelector('i').style.height = vals[i] + '%'), 250 + i * 110);
+});
+
+// ---- KPI count-up ----
+const faNum = n => n.toLocaleString('fa-IR');
+document.querySelectorAll('.k-val').forEach(el => {
+  const to = +el.dataset.to, t0 = performance.now(), dur = 1500;
+  (function tick(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    el.textContent = faNum(Math.round(to * (1 - Math.pow(1 - p, 3))));
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+});
+
+// ---- transactions ----
+const txs = [
+  ['سارا محمدی','فروشگاه آنلاین','۲٬۴۰۰٬۰۰۰','ok','۱۲ مرداد'],
+  ['امیر کریمی','اپلیکیشن مالی','۸٬۹۰۰٬۰۰۰','wait','۱۱ مرداد'],
+  ['نگار احمدی','سایت شرکتی','۱٬۲۵۰٬۰۰۰','ok','۱۰ مرداد'],
+  ['رضا تهرانی','پنل مدیریت','۵٬۶۰۰٬۰۰۰','no','۹ مرداد'],
+  ['مریم صادقی','لندینگ پیج','۹۸۰٬۰۰۰','ok','۸ مرداد'],
+];
+const labels = { ok: 'تکمیل‌شده', wait: 'در انتظار', no: 'لغوشده' };
+document.getElementById('txBody').innerHTML = txs.map(r =>
+  `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td><span class="pill ${r[3]}">${labels[r[3]]}</span></td><td style="color:var(--muted)">${r[4]}</td></tr>`
+).join('');
+</script>
+</body>
+</html>
